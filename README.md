@@ -61,3 +61,7 @@ yarn preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+
+# APP: 
+## info: web app, SSR type for unique authentification for many other app. 
