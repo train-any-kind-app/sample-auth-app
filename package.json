@@ -17,6 +17,9 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/auth-next": "5.0.0-1667386184.dfbbb54",
-    "@nuxtjs/axios": "^5.13.6"
+    "@nuxtjs/axios": "^5.13.6",
+    "@pinia/nuxt": "^0.4.11",
+    "@prisma/client": "^5.1.1",
+    "pinia": "^2.1.6"
   }
 }

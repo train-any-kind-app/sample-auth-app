@@ -10,8 +10,8 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
-    //'@nuxtjs/axios',
-    //'@nuxtjs/auth-next'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
   // auth: {
   //   strategies: {
