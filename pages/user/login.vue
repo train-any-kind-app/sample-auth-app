@@ -9,7 +9,7 @@
                 <NuxtLink :to="pgConnState.reset_redirect_link">{{ pgConnState.footer_link_forgot_pswd_title }}</NuxtLink>
             </li>
         </header>
-        <v-form class="form">
+        <div class="form">
             <div>
                 <div>
                     <label>Identifiant</label>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-        </v-form>
+        </div>
     </div>
 </template>
 
@@ -48,7 +48,7 @@ import { _val0, _val_false_invalid_User, _val_true, IN_APP_URL } from '../../uti
             register_redirect_link: IN_APP_URL.PAGE.REGISTER,
             footer_link_forgot_pswd_title:'Mot de passe oublié',
             reset_redirect_link: IN_APP_URL.PAGE.RESET_CREDENTIAL,
-            logIn: $auth.loggedIn
+            //logIn: $auth.loggedIn
         })
     );
 
@@ -61,23 +61,32 @@ import { _val0, _val_false_invalid_User, _val_true, IN_APP_URL } from '../../uti
             form_rst: _val0,
             field_valid_error_msg: ''
         });
-
+        const {signIn} = useAuth()
     const userLogin = async () => {
+        let check_auth_user = false;
         if(login.username && login.pswd){
+            let user = null;
             await useFetch(IN_APP_URL.API.LOGIN, {method:'post', body: { username:login.username, password:login.pswd } })
             .then((res) => {
                 const data = res.data.value
                 console.log("Auth response => "+ JSON.stringify(data))
                 if(data?.response) {
+                    user = data?.response;
                     loginForm.form_rst = _val_true;
+                    check_auth_user = true;
                 }else{;
                     loginForm.form_rst = _val_false_invalid_User;
+                    check_auth_user = false;
                 }
             })
             .catch((err) => {
                 //console.log('Err when Auth api return => ' +  JSON.stringify(err))
-            })
+            });
+            if(check_auth_user){
+                signIn('credentials', {email:user.email, password: pswd})
+            }
         }
+
     }
 
     const resetForm =  loginForm.form_rst = _val0
